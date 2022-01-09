@@ -233,13 +233,11 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
-  // const reducer = (previousValue, currentValue) => previousValue + currentValue;
-
-  // return arr.map((elem) => {
-  //   return elem.reduce(reducer);
-  // });
+function getMovingSum(arr) {
+  return arr.reduce((previous, current, index) => {
+    if (index === 0) return [...previous, current];
+    return [...previous, previous[index - 1] + current];
+  }, []);
 }
 
 /**
@@ -272,8 +270,9 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  const newArr = arr.map((elem, index) => new Array(index + 1).fill(elem));
+  return [].concat(...newArr);
 }
 
 
@@ -326,9 +325,21 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
-  // const numbers = { 'zero': 0, 'one': 1, 'two'}
+function sortDigitNamesByNumericOrder(arr) {
+  // throw new Error('Not implemented');
+  const numbers = {
+    zero: 0,
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+  };
+  return arr.sort((a, b) => numbers[a] - numbers[b]);
 }
 
 /**
@@ -426,6 +437,10 @@ function toStringList(arr) {
  */
 function sortCitiesArray(/* arr */) {
   throw new Error('Not implemented');
+  // return arr.sort((a, b) => {
+
+
+  // });
 }
 
 /**
@@ -537,8 +552,8 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.map(childrenSelector).flat();
 }
 
 
