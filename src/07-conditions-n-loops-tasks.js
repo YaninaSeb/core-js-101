@@ -346,60 +346,47 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
-  // let stack = [];
-  // let index;
-  // let res = true;
-  // brackets: for (let i = 0; i < str.length; i += 1) {
-  //   switch (str[i]) {
-  //     case '[' :
-  //       stack.push('[');
-  //       break;
-  //     case '(' :
-  //       stack.push('(');
-  //       break;
-  //     case '{' :
-  //       stack.push('{');
-  //       break;
-  //     case '<' :
-  //       stack.push('<');
-  //       break;
-  //     case ']' :
-  //       index = stack.lastIndexOf('[');
-  //       if (index < 0) {
-  //         res = false;
-  //         break brackets;
-  //       }
-  //       stack.splice(index, 1);
-  //       break;
-  //     case ')' :
-  //       index = stack.lastIndexOf('(');
-  //       if (index < 0) {
-  //         res = false;
-  //         break brackets;
-  //       }
-  //       stack.splice(index, 1);
-  //       break;
-  //     case '}' :
-  //       index = stack.lastIndexOf('{');
-  //       if (index < 0) {
-  //         res = false;
-  //         break brackets;
-  //       }
-  //       stack.splice(index, 1);
-  //       break;
-  //     case '>' :
-  //       index = stack.lastIndexOf('<');
-  //       if (index < 0) {
-  //         res = false;
-  //         break brackets;
-  //       }
-  //       stack.splice(index, 1);
-  //       break;
-  //   }
-  // }
-  // return res;
+function isBracketsBalanced(str) {
+  const stack = [];
+  let elem = '';
+  for (let i = 0; i < str.length; i += 1) {
+    switch (str[i]) {
+      case '[':
+      case '(':
+      case '{':
+      case '<':
+        stack.push(str[i]);
+        break;
+
+      case ']':
+        elem = stack.pop();
+        if (elem !== '[') {
+          return false;
+        }
+        break;
+      case ')':
+        elem = stack.pop();
+        if (elem !== '(') {
+          return false;
+        }
+        break;
+      case '}':
+        elem = stack.pop();
+        if (elem !== '{') {
+          return false;
+        }
+        break;
+      case '>':
+        elem = stack.pop();
+        if (elem !== '<') {
+          return false;
+        }
+        break;
+      default:
+        return false;
+    }
+  }
+  return stack.length === 0;
 }
 
 
